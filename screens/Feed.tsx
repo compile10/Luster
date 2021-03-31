@@ -25,4 +25,15 @@ const Feed = () => {
   );
 };
 
+Feed.options = {
+  statusBar: {
+    style: 'dark',
+    drawBehind: true,
+    backgroundColor: 'transparent',
+  },
+  topBar: {
+    visible: 'false',
+  },
+};
+
 export default Feed;
