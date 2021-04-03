@@ -25,7 +25,7 @@ const Feed = () => {
         data={posts}
         renderItem={({item}) => <VideoPost uri={item.url} />}
         showsVerticalScrollIndicator={false}
-        snapToInterval={Dimensions.get('window').height - 42}
+        snapToInterval={Dimensions.get('window').height}
         snapToAlignment={'start'}
         decelerationRate={'fast'}
       />
