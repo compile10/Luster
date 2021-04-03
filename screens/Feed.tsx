@@ -3,6 +3,7 @@
  */
 
 import React from 'react';
+import {View, StyleSheet} from 'react-native';
 
 import feedStyle from '../styles/feedStyle';
 import VideoPost from '../components/VideoPost';
@@ -20,8 +21,9 @@ const posts = [
 ];
 const Feed = () => {
   return (
-    <>
+    <View>
       <FlatList
+        contentInsetAdjustmentBehavior={'never'}
         data={posts}
         renderItem={({item}) => <VideoPost uri={item.url} />}
         showsVerticalScrollIndicator={false}
@@ -29,7 +31,7 @@ const Feed = () => {
         snapToAlignment={'start'}
         decelerationRate={'fast'}
       />
-    </>
+    </View>
   );
 };
 

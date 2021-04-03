@@ -11,7 +11,7 @@ interface videoProps {
 const VideoPost = (props: videoProps) => {
   const {uri} = props;
   return (
-    <View style={{width: '100%', height: Dimensions.get('window').height}}>
+    <View style={{width: '100%', height: Dimensions.get('window').height - 83}}>
       <Video
         source={{uri: uri}}
         style={videoPostStyle.video}
