@@ -8,6 +8,8 @@ import {Platform} from 'react-native';
 import {Navigation} from 'react-native-navigation';
 
 import {ApolloClient, ApolloProvider} from '@apollo/client';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+
 import {withNavigationProvider} from 'react-native-navigation-hooks';
 import {gestureHandlerRootHOC} from 'react-native-gesture-handler';
 import Geolocation from 'react-native-geolocation-service';
@@ -32,9 +34,11 @@ const providerWrapper = WappedComponent => {
   class WrappedComp extends React.Component {
     render() {
       return (
-        <ApolloProvider client={client}>
-          <WappedComponent {...this.props} />
-        </ApolloProvider>
+        <SafeAreaProvider>
+          <ApolloProvider client={client}>
+            <WappedComponent {...this.props} />
+          </ApolloProvider>
+        </SafeAreaProvider>
       );
     }
   }

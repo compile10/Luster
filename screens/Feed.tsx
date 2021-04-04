@@ -3,12 +3,14 @@
  */
 
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View} from 'react-native';
+
+import {FlatList, RectButton} from 'react-native-gesture-handler';
+import {useSafeAreaFrame} from 'react-native-safe-area-context';
 
 import feedStyle from '../styles/feedStyle';
 import VideoPost from '../components/VideoPost';
-import {FlatList} from 'react-native-gesture-handler';
-import {Dimensions} from 'react-native';
+
 const posts = [
   {
     id: 1,
@@ -20,6 +22,8 @@ const posts = [
   },
 ];
 const Feed = () => {
+  const frame = useSafeAreaFrame();
+
   return (
     <View>
       <FlatList
@@ -27,10 +31,13 @@ const Feed = () => {
         data={posts}
         renderItem={({item}) => <VideoPost uri={item.url} />}
         showsVerticalScrollIndicator={false}
-        snapToInterval={Dimensions.get('window').height - 83}
+        snapToInterval={frame.height}
         snapToAlignment={'start'}
         decelerationRate={'fast'}
       />
+      <RectButton>
+        <View />
+      </RectButton>
     </View>
   );
 };
