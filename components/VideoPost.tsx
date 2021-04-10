@@ -28,16 +28,16 @@ const VideoPost = (props: videoProps) => {
         />
         <View style={videoPostStyle.buttons}>
           <RectButton underlayColor="transparent" rippleColor="transparent">
-            <View accessible style={videoPostStyle.avatar}>
+            <View accessible style={videoPostStyle.user}>
               <Image
                 source={{uri: avatar}}
                 style={videoPostStyle.avatarImage}
               />
+              <View style={videoPostStyle.username}>
+                <Text style={videoPostStyle.usernameText}> @{username} </Text>
+              </View>
             </View>
           </RectButton>
-          <View style={videoPostStyle.username}>
-            <Text style={videoPostStyle.usernameText}> @{username} </Text>
-          </View>
         </View>
       </View>
     </>

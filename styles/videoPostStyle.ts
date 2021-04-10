@@ -16,6 +16,10 @@ const videoPostStyle = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
+  user: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   avatarImage: {
     borderRadius: 50,
     width: 30,
