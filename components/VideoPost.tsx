@@ -1,26 +1,46 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Text, Image} from 'react-native';
 
 import Video from 'react-native-video';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
+import {RectButton} from 'react-native-gesture-handler';
 
+import Icon from './Icon';
 import videoPostStyle from '../styles/videoPostStyle';
 
 interface videoProps {
-  uri: string;
+  source: string;
+  avatar: string;
+  username: string;
 }
 
 const VideoPost = (props: videoProps) => {
   const frame = useSafeAreaFrame();
-  const {uri} = props;
+
+  const {source, avatar, username} = props;
   return (
-    <View style={{width: '100%', height: frame.height}}>
-      <Video
-        source={{uri: uri}}
-        style={videoPostStyle.video}
-        resizeMode={'cover'}
-      />
-    </View>
+    <>
+      <View style={{width: '100%', height: frame.height}}>
+        <Video
+          source={{uri: source}}
+          style={videoPostStyle.video}
+          resizeMode={'cover'}
+        />
+        <View style={videoPostStyle.buttons}>
+          <RectButton underlayColor="transparent" rippleColor="transparent">
+            <View accessible style={videoPostStyle.avatar}>
+              <Image
+                source={{uri: avatar}}
+                style={videoPostStyle.avatarImage}
+              />
+            </View>
+          </RectButton>
+          <View style={videoPostStyle.username}>
+            <Text style={videoPostStyle.usernameText}> @{username} </Text>
+          </View>
+        </View>
+      </View>
+    </>
   );
 };
 

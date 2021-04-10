@@ -15,10 +15,12 @@ const posts = [
   {
     id: 1,
     url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    username: 'compile10',
   },
   {
     id: 2,
     url: 'https://www.w3schools.com/html/mov_bbb.mp4',
+    username: 'BobBobson21',
   },
 ];
 const Feed = () => {
@@ -29,7 +31,7 @@ const Feed = () => {
       <FlatList
         contentInsetAdjustmentBehavior={'never'}
         data={posts}
-        renderItem={({item}) => <VideoPost uri={item.url} />}
+        renderItem={({item}) => <VideoPost source={item.url} avatar={'https://pbs.twimg.com/profile_images/1380792035716698119/3l5wLTZ__400x400.jpg'} username={item.username}/>}
         showsVerticalScrollIndicator={false}
         snapToInterval={frame.height}
         snapToAlignment={'start'}
