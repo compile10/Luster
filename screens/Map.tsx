@@ -229,7 +229,7 @@ const Map = () => {
           {
             position: 'absolute',
             bottom: -410,
-            left: 30,
+            left: '5%',
           },
           spotCardEnterAni,
         ]}>
