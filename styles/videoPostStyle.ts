@@ -12,8 +12,10 @@ const videoPostStyle = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 10,
     marginLeft: 10,
+    marginRight: 10,
     display: 'flex',
     flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
   },
   user: {
@@ -35,6 +37,38 @@ const videoPostStyle = StyleSheet.create({
   username: {
     marginLeft: 3,
     width: 80,
+  },
+  iconRow: {
+    flexDirection: 'row',
+  },
+  icon: {
+    marginLeft: 20,
+    color: 'white',
+    fontSize: 35,
+    marginBottom: 2,
+  },
+  topText: {
+    display: 'flex',
+    marginTop: 60,
+    marginLeft: 10,
+  },
+  titleText: {
+    color: 'white',
+    fontSize: 35,
+  },
+  location: {
+    marginTop: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  locationText: {
+    color: 'white',
+    fontSize: 20,
+  },
+  locationIcon: {
+    color: 'tomato',
+    marginRight: 3,
+    fontSize: 22,
   },
 });
 
