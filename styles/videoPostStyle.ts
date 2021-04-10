@@ -28,10 +28,24 @@ const videoPostStyle = StyleSheet.create({
     height: 30,
     borderColor: 'white',
     borderWidth: 1,
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2,
   },
   usernameText: {
     color: 'white',
     fontSize: 10,
+    textShadowColor: 'rgba(0, 0, 0, 0.8)',
+    textShadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    textShadowRadius: 1.2,
   },
 
   username: {
@@ -44,8 +58,14 @@ const videoPostStyle = StyleSheet.create({
   icon: {
     marginLeft: 20,
     color: 'white',
-    fontSize: 35,
+    fontSize: 25,
     marginBottom: 2,
+    textShadowColor: 'rgba(0, 0, 0, 0.6)',
+    textShadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    textShadowRadius: 1.5,
   },
   topText: {
     display: 'flex',
@@ -55,6 +75,12 @@ const videoPostStyle = StyleSheet.create({
   titleText: {
     color: 'white',
     fontSize: 35,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    textShadowRadius: 1.2,
   },
   location: {
     marginTop: 5,
@@ -64,11 +90,23 @@ const videoPostStyle = StyleSheet.create({
   locationText: {
     color: 'white',
     fontSize: 20,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    textShadowRadius: 1.2,
   },
   locationIcon: {
     color: 'tomato',
     marginRight: 3,
     fontSize: 22,
+    textShadowColor: 'rgba(0, 0, 0, 0.2)',
+    textShadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    textShadowRadius: 1.2,
   },
 });
 
