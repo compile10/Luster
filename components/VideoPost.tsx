@@ -9,7 +9,6 @@ import Animated, {
   withSpring,
   runOnJS,
   useAnimatedStyle,
-  runOnUI,
 } from 'react-native-reanimated';
 
 import Icon from './Icon';
