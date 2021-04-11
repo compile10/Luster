@@ -344,7 +344,7 @@ PODS:
     - React-Core
   - RNPermissions (3.0.1):
     - React-Core
-  - RNReanimated (2.0.0):
+  - RNReanimated (2.1.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -579,7 +579,7 @@ SPEC CHECKSUMS:
   ReactNativeNavigation: 53ba485fbb370aeed7057020f351b814e51c18ef
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNPermissions: 4c8a37b4dde50f1f152bf8cd08c4a43d2355829e
-  RNReanimated: 64f6c5789f82818c07ba3c71864b73619cb23c76
+  RNReanimated: b8c8004b43446e3c2709fe64b2b41072f87428ad
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 

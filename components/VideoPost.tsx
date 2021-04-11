@@ -7,7 +7,9 @@ import {RectButton} from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   withSpring,
+  runOnJS,
   useAnimatedStyle,
+  runOnUI,
 } from 'react-native-reanimated';
 
 import Icon from './Icon';
@@ -32,8 +34,14 @@ const VideoPost = (props: videoProps) => {
     setDescVisible(true);
     descOffset.value = withSpring(235, {damping: 25, stiffness: 100});
   };
+
+  const wrappedSet = () => {
+    setDescVisible(false);
+  };
   const onPressExit = () => {
-    descOffset.value = withSpring(0);
+    descOffset.value = withSpring(0, {overshootClamping: false}, () =>
+      runOnJS(wrappedSet)(),
+    );
   };
   const spotCardEnterAni = useAnimatedStyle(() => ({
     transform: [{translateY: -descOffset.value}],
