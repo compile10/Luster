@@ -65,7 +65,7 @@ const videoPostStyle = StyleSheet.create({
       width: 0,
       height: 1,
     },
-    textShadowRadius: 1.5,
+    textShadowRadius: 1.2,
   },
   topText: {
     display: 'flex',
@@ -107,6 +107,11 @@ const videoPostStyle = StyleSheet.create({
       height: 1,
     },
     textShadowRadius: 1.2,
+  },
+  descCard: {
+    position: 'absolute',
+    bottom: 40,
+    left: 20,
   },
 });
 

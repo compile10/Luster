@@ -1,11 +1,13 @@
-import React from 'react';
-import {View, Text, Image} from 'react-native';
+import React, {useState} from 'react';
+import {View, Image} from 'react-native';
 
 import Video from 'react-native-video';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 import {RectButton} from 'react-native-gesture-handler';
 
 import Icon from './Icon';
+import OText from './Text';
+import DescCard from './DescCard';
 import videoPostStyle from '../styles/videoPostStyle';
 
 interface videoProps {
@@ -17,6 +19,7 @@ interface videoProps {
 }
 
 const VideoPost = (props: videoProps) => {
+  const [descVisible, setDescVisible] = useState(true);
   const frame = useSafeAreaFrame();
 
   const {source, avatar, username, title, location} = props;
@@ -29,7 +32,7 @@ const VideoPost = (props: videoProps) => {
           resizeMode={'cover'}
         />
         <View style={videoPostStyle.topText}>
-          <Text style={videoPostStyle.titleText}>{title}</Text>
+          <OText style={videoPostStyle.titleText}>{title}</OText>
           <View style={videoPostStyle.location}>
             <View>
               <Icon
@@ -38,7 +41,7 @@ const VideoPost = (props: videoProps) => {
                 style={videoPostStyle.locationIcon}
               />
             </View>
-            <Text style={videoPostStyle.locationText}>{location}</Text>
+            <OText style={videoPostStyle.locationText}>{location}</OText>
           </View>
         </View>
         <View style={videoPostStyle.buttons}>
@@ -49,7 +52,7 @@ const VideoPost = (props: videoProps) => {
                 style={videoPostStyle.avatarImage}
               />
               <View style={videoPostStyle.username}>
-                <Text style={videoPostStyle.usernameText}> @{username} </Text>
+                <OText style={videoPostStyle.usernameText}> @{username} </OText>
               </View>
             </View>
           </RectButton>
@@ -78,6 +81,15 @@ const VideoPost = (props: videoProps) => {
           </View>
         </View>
       </View>
+      {descVisible && (
+        <DescCard
+          style={videoPostStyle.descCard}
+          tags="#lol #memes #test #wow #lmao #based #scating #autism"
+          desc="This is my test desc. Gotta keep typing for tests."
+          likes={431}
+          views={3143}
+        />
+      )}
     </>
   );
 };
