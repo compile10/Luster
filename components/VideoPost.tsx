@@ -39,7 +39,7 @@ const VideoPost = (props: videoProps) => {
     setDescVisible(false);
   };
   const onPressExit = () => {
-    descOffset.value = withSpring(0, {overshootClamping: false}, () =>
+    descOffset.value = withSpring(0, {overshootClamping: true}, () =>
       runOnJS(wrappedSet)(),
     );
   };
