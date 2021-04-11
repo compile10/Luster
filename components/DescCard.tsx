@@ -17,7 +17,7 @@ interface SpotCardProps {
 }
 
 const SpotCard = (props: SpotCardProps) => {
-  const {style, tags, desc, likes, views} = props;
+  const {style, tags, desc, likes, views, onPressExit} = props;
   return (
     <View style={descCardStyle.shadowContainer}>
       <View style={[descCardStyle.container, style]}>
@@ -28,7 +28,8 @@ const SpotCard = (props: SpotCardProps) => {
           <RectButton
             style={descCardStyle.exitButton}
             rippleColor="transparent"
-            underlayColor="transparent">
+            underlayColor="transparent"
+            onPress={onPressExit}>
             <Icon
               set="Material Icons"
               id={57676}

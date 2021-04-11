@@ -4,6 +4,11 @@ import {View, Image} from 'react-native';
 import Video from 'react-native-video';
 import {useSafeAreaFrame} from 'react-native-safe-area-context';
 import {RectButton} from 'react-native-gesture-handler';
+import Animated, {
+  useSharedValue,
+  withSpring,
+  useAnimatedStyle,
+} from 'react-native-reanimated';
 
 import Icon from './Icon';
 import OText from './Text';
@@ -19,8 +24,20 @@ interface videoProps {
 }
 
 const VideoPost = (props: videoProps) => {
-  const [descVisible, setDescVisible] = useState(true);
+  const descOffset = useSharedValue(0);
+  const [descVisible, setDescVisible] = useState(false);
   const frame = useSafeAreaFrame();
+
+  const onPressDesc = () => {
+    setDescVisible(true);
+    descOffset.value = withSpring(235, {damping: 25, stiffness: 100});
+  };
+  const onPressExit = () => {
+    descOffset.value = withSpring(0);
+  };
+  const spotCardEnterAni = useAnimatedStyle(() => ({
+    transform: [{translateY: -descOffset.value}],
+  }));
 
   const {source, avatar, username, title, location} = props;
   return (
@@ -57,7 +74,10 @@ const VideoPost = (props: videoProps) => {
             </View>
           </RectButton>
           <View style={videoPostStyle.iconRow}>
-            <RectButton underlayColor="transparent" rippleColor="transparent">
+            <RectButton
+              underlayColor="transparent"
+              rippleColor="transparent"
+              onPress={onPressDesc}>
               <Icon
                 set="Material Community Icons"
                 id={983512}
@@ -82,13 +102,23 @@ const VideoPost = (props: videoProps) => {
         </View>
       </View>
       {descVisible && (
-        <DescCard
-          style={videoPostStyle.descCard}
-          tags="#lol #memes #test #wow #lmao #based #scating #autism"
-          desc="This is my test desc. Gotta keep typing for tests."
-          likes={431}
-          views={3143}
-        />
+        <Animated.View
+          style={[
+            {
+              position: 'absolute',
+              bottom: -210,
+            },
+            spotCardEnterAni,
+          ]}>
+          <DescCard
+            onPressExit={onPressExit}
+            style={videoPostStyle.descCard}
+            tags="#lol #memes #test #wow #lmao #based #scating #autism"
+            desc="This is my test desc. Gotta keep typing for tests."
+            likes={431}
+            views={3143}
+          />
+        </Animated.View>
       )}
     </>
   );
