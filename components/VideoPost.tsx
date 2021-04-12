@@ -34,6 +34,7 @@ const VideoPost = (props: videoProps) => {
     descOffset.value = withSpring(235, {damping: 25, stiffness: 100});
   };
 
+  //runOnJS requires the function to be wrapped if its from a lib
   const wrappedSet = () => {
     setDescVisible(false);
   };
