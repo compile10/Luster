@@ -1,4 +1,11 @@
 module.exports = {
   root: true,
-  extends: '@react-native-community',
+  plugins: ['prettier'],
+  extends: ['plugin:prettier/recommended', 'airbnb-typescript'],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+  rules: {
+    'prettier/prettier': 'error',
+  }
 };
