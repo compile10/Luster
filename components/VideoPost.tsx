@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
-import {View, Image} from 'react-native';
+import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import { View, Image, TouchableWithoutFeedback } from 'react-native';
 
 import Video from 'react-native-video';
-import {useSafeAreaFrame} from 'react-native-safe-area-context';
-import {RectButton} from 'react-native-gesture-handler';
+import { useSafeAreaFrame } from 'react-native-safe-area-context';
+import { RectButton } from 'react-native-gesture-handler';
 import Animated, {
   useSharedValue,
   withSpring,
@@ -16,7 +16,7 @@ import OText from './Text';
 import DescCard from './DescCard';
 import videoPostStyle from '../styles/videoPostStyle';
 
-interface videoProps {
+interface VideoProps {
   source: string;
   avatar: string;
   username: string;
@@ -24,38 +24,48 @@ interface videoProps {
   location: string;
 }
 
-const VideoPost = (props: videoProps) => {
+const VideoPost = forwardRef((props: VideoProps, ref: any) => {
   const descOffset = useSharedValue(0);
   const [descVisible, setDescVisible] = useState(false);
+  const [pausedState, setPausedState] = useState(true);
   const frame = useSafeAreaFrame();
 
+  const play = () => {
+    setPausedState(false);
+  };
+  useImperativeHandle(ref, () => ({
+    play
+  }));
   const onPressDesc = () => {
     setDescVisible(true);
-    descOffset.value = withSpring(235, {damping: 25, stiffness: 100});
+    descOffset.value = withSpring(235, { damping: 25, stiffness: 100 });
   };
 
-  //runOnJS requires the function to be wrapped if its from a lib
+  // runOnJS requires the function to be wrapped if its from a lib
   const wrappedSet = () => {
     setDescVisible(false);
   };
   const onPressExit = () => {
-    descOffset.value = withSpring(0, {overshootClamping: true}, () =>
+    descOffset.value = withSpring(0, { overshootClamping: true }, () =>
       runOnJS(wrappedSet)(),
     );
   };
   const spotCardEnterAni = useAnimatedStyle(() => ({
-    transform: [{translateY: -descOffset.value}],
+    transform: [{ translateY: -descOffset.value }],
   }));
 
-  const {source, avatar, username, title, location} = props;
+  const { source, avatar, username, title, location } = props;
   return (
     <>
-      <View style={{width: '100%', height: frame.height}}>
-        <Video
-          source={{uri: source}}
-          style={videoPostStyle.video}
-          resizeMode={'cover'}
-        />
+      <View style={{ width: '100%', height: frame.height }}>
+        <TouchableWithoutFeedback onPress={() => setPausedState(!pausedState)}>
+          <Video
+            source={{ uri: source }}
+            style={videoPostStyle.video}
+            paused={pausedState}
+            resizeMode="cover"
+          />
+        </TouchableWithoutFeedback>
         <View style={videoPostStyle.topText}>
           <OText style={videoPostStyle.titleText}>{title}</OText>
           <View style={videoPostStyle.location}>
@@ -73,7 +83,7 @@ const VideoPost = (props: videoProps) => {
           <RectButton underlayColor="transparent" rippleColor="transparent">
             <View accessible style={videoPostStyle.user}>
               <Image
-                source={{uri: avatar}}
+                source={{ uri: avatar }}
                 style={videoPostStyle.avatarImage}
               />
               <View style={videoPostStyle.username}>
@@ -130,6 +140,6 @@ const VideoPost = (props: videoProps) => {
       )}
     </>
   );
-};
+});
 
 export default VideoPost;
