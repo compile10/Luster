@@ -45,8 +45,13 @@ const VideoPost = forwardRef((props: VideoProps, ref: any) => {
   const play = () => {
     setPausedState(false);
   };
+  const pause = () => {
+    setPausedState(true);
+  };
+
   useImperativeHandle(ref, () => ({
     play,
+    pause,
   }));
   const onPressDesc = () => {
     setDescVisible(true);
@@ -98,7 +103,11 @@ const VideoPost = forwardRef((props: VideoProps, ref: any) => {
                 style={videoPostStyle.avatarImage}
               />
               <View style={videoPostStyle.username}>
-                <OText style={videoPostStyle.usernameText}> @{username} </OText>
+                <OText style={videoPostStyle.usernameText}> @
+{username}
+{' '}
+ 
+                </OText>
               </View>
             </View>
           </RectButton>
