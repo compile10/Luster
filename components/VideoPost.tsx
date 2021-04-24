@@ -1,4 +1,9 @@
-import React, { useState, useImperativeHandle, forwardRef } from 'react';
+import React, {
+  useState,
+  useImperativeHandle,
+  forwardRef,
+  useEffect,
+} from 'react';
 import { View, Image, TouchableWithoutFeedback } from 'react-native';
 
 import Video from 'react-native-video';
@@ -22,6 +27,7 @@ interface VideoProps {
   username: string;
   title: string;
   location: string;
+  startplay?: boolean;
 }
 
 const VideoPost = forwardRef((props: VideoProps, ref: any) => {
@@ -29,12 +35,18 @@ const VideoPost = forwardRef((props: VideoProps, ref: any) => {
   const [descVisible, setDescVisible] = useState(false);
   const [pausedState, setPausedState] = useState(true);
   const frame = useSafeAreaFrame();
+  const { source, avatar, username, title, location, startplay } = props;
 
+  useEffect(() => {
+    if (startplay === true) {
+      setPausedState(false);
+    }
+  }, []);
   const play = () => {
     setPausedState(false);
   };
   useImperativeHandle(ref, () => ({
-    play
+    play,
   }));
   const onPressDesc = () => {
     setDescVisible(true);
@@ -54,7 +66,6 @@ const VideoPost = forwardRef((props: VideoProps, ref: any) => {
     transform: [{ translateY: -descOffset.value }],
   }));
 
-  const { source, avatar, username, title, location } = props;
   return (
     <>
       <View style={{ width: '100%', height: frame.height }}>
@@ -141,5 +152,7 @@ const VideoPost = forwardRef((props: VideoProps, ref: any) => {
     </>
   );
 });
-
+VideoPost.defaultProps = {
+  startplay: false,
+};
 export default VideoPost;

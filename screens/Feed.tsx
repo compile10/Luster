@@ -55,17 +55,33 @@ const Feed = () => {
         onViewableItemsChanged={onViewableItemsChanged}
         data={posts}
         keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <VideoPost
-            // eslint-disable-next-line no-return-assign
-            ref={(ref: any) => (postRefs.current[item.id.toString()] = ref)}
-            title={item.title}
-            location={item.location}
-            source={item.url}
-            avatar="https://pbs.twimg.com/profile_images/1380792035716698119/3l5wLTZ__400x400.jpg"
-            username={item.username}
-          />
-        )}
+        renderItem={({ item, index }) => {
+          if (index === 0) {
+            return (
+              <VideoPost
+                // eslint-disable-next-line no-return-assign
+                ref={(ref: any) => (postRefs.current[item.id.toString()] = ref)}
+                title={item.title}
+                location={item.location}
+                source={item.url}
+                startplay
+                avatar="https://pbs.twimg.com/profile_images/1380792035716698119/3l5wLTZ__400x400.jpg"
+                username={item.username}
+              />
+            );
+          }
+          return (
+            <VideoPost
+              // eslint-disable-next-line no-return-assign
+              ref={(ref: any) => (postRefs.current[item.id.toString()] = ref)}
+              title={item.title}
+              location={item.location}
+              source={item.url}
+              avatar="https://pbs.twimg.com/profile_images/1380792035716698119/3l5wLTZ__400x400.jpg"
+              username={item.username}
+            />
+          );
+        }}
         showsVerticalScrollIndicator={false}
         snapToInterval={frame.height}
         snapToAlignment="start"
