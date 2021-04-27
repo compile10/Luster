@@ -7,5 +7,6 @@ module.exports = {
   },
   rules: {
     'prettier/prettier': 'error',
+    'no-plusplus': 'false'
   }
 };

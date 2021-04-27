@@ -10,6 +10,7 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
 import feedStyle from '../styles/feedStyle';
 import VideoPost from '../components/VideoPost';
+import e from 'express';
 
 const posts = [
   {
@@ -33,7 +34,7 @@ const Feed = () => {
 
   const viewabilityConfig = {
     waitForInteraction: true,
-    viewAreaCoveragePercentThreshold: 100,
+    viewAreaCoveragePercentThreshold: 70,
   };
 
   const onViewableItemsChanged = useCallback(({ viewableItems, changed }) => {
@@ -41,8 +42,19 @@ const Feed = () => {
       postRefs.current[post.key].play();
       return null;
     });
-    changed.map((post: any) => {
-      postRefs.current[post.key].pause();
+    console.log("Viewables:")
+    const refsKeys = Object.keys(postRefs.current);
+    const viewableKeys = viewableItems.map((post: any) => post.key);
+    console.log(viewableKeys)
+    console.log("Unviewables:")
+    refsKeys.map((key) => {
+      for (let i = 0; i <= viewableKeys.length; i++) {
+        if(viewableKeys[i] === key){
+          return null
+        }
+      }
+      console.log(key)
+      postRefs.current[key].pause();
       return null;
     });
   }, []);
