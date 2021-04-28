@@ -1,5 +1,6 @@
 import express = require('express');
 const serverless = require('serverless-http');
+const AWS = require("aws-sdk");
 
 const { ApolloServer} = require('apollo-server-express');
 import {makeExecutableSchema} from 'graphql-tools';
@@ -10,10 +11,14 @@ import {typeDefs} from './types';
 function randomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
+const VideoPostsTable = process.env.VIDEOPOSTS_TABLE;
+
 // The resolvers
 const resolvers = {
   Query: {
-    postList: () => {
+    feed: () => {
       let posts = [];
       for (let i = 0; i < randomNumber(1, 10); i++) {
         posts.push({

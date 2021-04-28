@@ -1,5 +1,5 @@
 export const typeDefs = `
-  type Query { postList: [post], spotList: [spot] }
+  type Query { feed: [post], spotList: [spot] }
   type post { 
     title: String,
     postId: Int,
