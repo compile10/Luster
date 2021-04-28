@@ -59,6 +59,8 @@
     "pod-install": "^0.1.18",
     "prettier": "^2.2.1",
     "react-test-renderer": "17.0.1",
+    "serverless-http": "^2.7.0",
+    "serverless-plugin-typescript": "^1.1.9",
     "ts-node": "^9.1.1",
     "typescript": "^3.8.3"
   },

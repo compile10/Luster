@@ -1,7 +1,7 @@
-import express from 'express';
+import express = require('express');
+const serverless = require('serverless-http');
 
-import bodyParser from 'body-parser';
-import {graphqlExpress, graphiqlExpress} from 'apollo-server-express';
+const { ApolloServer} = require('apollo-server-express');
 import {makeExecutableSchema} from 'graphql-tools';
 import * as faker from 'faker';
 
@@ -57,16 +57,12 @@ const schema = makeExecutableSchema({
   resolvers,
 });
 
-// Initialize the app
 const app = express();
+const server = new ApolloServer({ 
+  schema,   
+  introspection: false,
+  playground: false,
+ });
+server.applyMiddleware({ app });
 
-// The GraphQL endpoint
-app.use('/api', bodyParser.json(), graphqlExpress({schema}));
-
-// GraphiQL, a visual editor for queries
-app.use('/graphiql', graphiqlExpress({endpointURL: '/api'}));
-
-// Start the server
-app.listen(3000, () => {
-  console.log('Go to http://localhost:3000/graphiql to run queries!');
-});
+module.exports.handler = serverless(app);

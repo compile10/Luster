@@ -1,0 +1,57 @@
+org: compile10
+app: chiral
+service: chiral
+
+frameworkVersion: '2'
+
+custom:
+  VideoPosts: 'VideoPosts-${self:provider.stage}'
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: '20201221'
+  stage: dev
+  region: us-west-1
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+          Resource: 'arn:aws:dynamodb:us-west-1:*:*'
+  environment:
+    VIDEOPOSTS_TABLE: ${self:custom.VideoPosts}
+
+functions:
+  api:
+    handler: handler.handler
+    events:
+      - http:
+          path: graphql
+          method: ANY
+          cors: true
+
+resources:
+  Resources:
+    VideoPosts:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: postId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: postId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.VideoPosts}
+plugins:
+  - serverless-plugin-typescript
