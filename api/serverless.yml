@@ -5,7 +5,8 @@ service: chiral
 frameworkVersion: '2'
 
 custom:
-  VideoPosts: 'VideoPosts1-${self:provider.stage}'
+  VideoPosts: 'VideoPosts-${self:provider.stage}'
+  VideoPostsByDateLiked: 'VideoPostsByDateLiked-${self:provider.stage}'
 
 provider:
   name: aws
@@ -46,16 +47,30 @@ resources:
         AttributeDefinitions:
           - AttributeName: postId
             AttributeType: S
+        KeySchema:
+          - AttributeName: postId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1
+        TableName: ${self:custom.VideoPosts}
+    VideoPostsByDateLiked:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        AttributeDefinitions:
+          - AttributeName: date
+            AttributeType: S
           - AttributeName: likes
             AttributeType: N
         KeySchema:
-          - AttributeName: postId
+          - AttributeName: date
             KeyType: HASH
           - AttributeName: likes
             KeyType: RANGE
         ProvisionedThroughput:
           ReadCapacityUnits: 1
           WriteCapacityUnits: 1
-        TableName: ${self:custom.VideoPosts}
+        TableName: ${self:custom.VideoPostsByDateLiked}
+
 plugins:
   - serverless-plugin-typescript

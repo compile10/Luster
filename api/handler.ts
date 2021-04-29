@@ -1,6 +1,6 @@
 import express = require('express');
 const serverless = require('serverless-http');
-const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
+const { DynamoDBClient, GetItemCommand } = require("@aws-sdk/client-dynamodb");
 
 const { ApolloServer} = require('apollo-server-express');
 import {makeExecutableSchema} from 'graphql-tools';
@@ -19,11 +19,11 @@ const resolvers = {
   Query: {
     feed: async () => {
       const client = new DynamoDBClient({ region: "us-west-1" });
-      const command = new QueryCommand({TableName: VideoPostsTable, ScanIndexForward: 'false', limit: 10});
+      const command = new GetItemCommand({TableName: VideoPostsTable, Key: {postId: {'S': '41324'}, likes: {'N': '314'} } });
       try {
         const results = await client.send(command)
         console.log(results)
-        return results.Items
+        return results.Item
       } catch (err) {
         console.error(err);
       }
