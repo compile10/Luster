@@ -5,7 +5,7 @@ service: chiral
 frameworkVersion: '2'
 
 custom:
-  VideoPosts: 'VideoPosts-${self:provider.stage}'
+  VideoPosts: 'VideoPosts1-${self:provider.stage}'
 
 provider:
   name: aws
