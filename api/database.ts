@@ -2,11 +2,11 @@ const { DynamoDBClient, GetItemCommand } = require("@aws-sdk/client-dynamodb");
 
 class database {
     databaseName: string;
-    region: string;
-
+    client: typeof DynamoDBClient;
+    
     constructor(databaseName: string, region: string){
         this.databaseName = databaseName;
-        this.region = region;
+        this.client = new DynamoDBClient({region: region})
     }
-    
+
 }
