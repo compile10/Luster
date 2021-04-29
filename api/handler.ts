@@ -1,6 +1,6 @@
 import express = require('express');
 const serverless = require('serverless-http');
-const AWS = require("aws-sdk");
+const { DynamoDBClient, QueryCommand } = require("@aws-sdk/client-dynamodb");
 
 const { ApolloServer} = require('apollo-server-express');
 import {makeExecutableSchema} from 'graphql-tools';
@@ -12,27 +12,21 @@ function randomNumber(min: number, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
-const dynamoDbClient = new AWS.DynamoDB.DocumentClient();
 const VideoPostsTable = process.env.VIDEOPOSTS_TABLE;
 
 // The resolvers
 const resolvers = {
   Query: {
-    feed: () => {
-      let posts = [];
-      for (let i = 0; i < randomNumber(1, 10); i++) {
-        posts.push({
-          title: faker.lorem.words(),
-          postId: faker.datatype.number(),
-          username: faker.internet.userName(),
-          avatar: 'https://i.pravatar.cc/300',
-          thumbnail: 'faker.image.city()',
-          skatespot: faker.lorem.words(),
-          views: faker.datatype.number(),
-          likes: faker.datatype.number(),
-        });
+    feed: async () => {
+      const client = new DynamoDBClient({ region: "us-west-1" });
+      const command = new QueryCommand({TableName: VideoPostsTable, ScanIndexForward: 'false', limit: 10});
+      try {
+        const results = await client.send(command)
+        console.log(results)
+        return results.Items
+      } catch (err) {
+        console.error(err);
       }
-      return posts;
     },
     spotList: () => {
       let spots = [];
