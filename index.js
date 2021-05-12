@@ -17,7 +17,7 @@ import Geolocation from 'react-native-geolocation-service';
 import {geolocationCache, cache} from './localCache';
 import Feed from './screens/Feed';
 import Map from './screens/Map';
-import Icon from './components/Icon';
+import Login from './screens/Login';
 
 import {navigationRoot} from './navigation';
 const uri =
@@ -45,9 +45,18 @@ const providerWrapper = WappedComponent => {
   WrappedComp.options = WappedComponent.options;
   return gestureHandlerRootHOC(withNavigationProvider(WrappedComp));
 };
-
+Navigation.registerComponent('Login', () => providerWrapper(Login));
 Navigation.registerComponent('Feed', () => providerWrapper(Feed));
 Navigation.registerComponent('Map', () => providerWrapper(Map));
+
+
+const loginRoot = {
+  root: {
+    component: {
+      name: 'Login'
+    }
+  }
+};
 
 Navigation.events().registerAppLaunchedListener(() => {
   Geolocation.getCurrentPosition(position => {
@@ -63,8 +72,5 @@ Navigation.events().registerAppLaunchedListener(() => {
     });
   });
 
-  Promise.all([
-    Icon.getImageSource('Material Icons', 59530, 30, 'black'),
-    Icon.getImageSource('Material Icons', 58715, 30, 'black'),
-  ]).then(icons => Navigation.setRoot(navigationRoot(icons)));
+Navigation.setRoot(loginRoot);
 });

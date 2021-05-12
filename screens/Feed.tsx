@@ -10,7 +10,6 @@ import { useSafeAreaFrame } from 'react-native-safe-area-context';
 
 import feedStyle from '../styles/feedStyle';
 import VideoPost from '../components/VideoPost';
-import e from 'express';
 
 const posts = [
   {
