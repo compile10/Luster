@@ -20,4 +20,6 @@ Text.tsx | Wraps default text with font used in app.
 VideoPost.js |  Represents a single video in the feed screen.
 
 
-![main](READMEIMG.gif)
+
+https://user-images.githubusercontent.com/21991598/126288435-1aff1b0c-c2b1-4b11-b573-27b68c8f1122.mp4
+
