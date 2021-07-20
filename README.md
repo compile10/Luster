@@ -1,3 +1,6 @@
+
+
+
 # Luster
 
 **What is this app?**
@@ -23,3 +26,4 @@ VideoPost.js |  Represents a single video in the feed screen.
 
 https://user-images.githubusercontent.com/21991598/126288435-1aff1b0c-c2b1-4b11-b573-27b68c8f1122.mp4
 
+https://user-images.githubusercontent.com/21991598/126289028-d5c912dd-0cac-49ee-a8db-02ddca54f320.mp4
