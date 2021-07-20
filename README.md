@@ -22,7 +22,7 @@ Icon.tsx |   Used to wrap react native vector icons lib.
 Text.tsx | Wraps default text with font used in app. 
 VideoPost.js |  Represents a single video in the feed screen.
 
-
+[React-Native-Vector-Icons](https://github.com/oblador/react-native-vector-icons) is used in this app (not as a package but in the src) so it's license is included. 
 
 https://user-images.githubusercontent.com/21991598/126288435-1aff1b0c-c2b1-4b11-b573-27b68c8f1122.mp4
 
