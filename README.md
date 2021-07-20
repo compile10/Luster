@@ -2,7 +2,7 @@
 
 **What is this app?**
 
->This is a React Native app that will allow skaters to find local skate parks and share videos. 
+>This is a client for a React Native app that will allow skaters to find local skate parks and share videos. 
 
 **How do I install and run the program?**
 
